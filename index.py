@@ -25,9 +25,3 @@ password = handle.generatePassword(prefs , length)
 print("Creating password..")
 sleep(1)
 print("Your new password is " + password)
-
-# Include files handling to save passwords
-# Include min length verification
-# Verify Password strength
-# Build a GUI
-
