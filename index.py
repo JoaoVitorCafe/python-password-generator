@@ -25,3 +25,4 @@ password = handle.generatePassword(prefs , length)
 print("Creating password..")
 sleep(1)
 print("Your new password is " + password)
+
