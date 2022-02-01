@@ -3,7 +3,6 @@ import random
 
 def getRandomNumber():
     # This function return a random number between 0 and 9
-    random.seed()
     return str(random.randint(0 , 9))
 
 def getRandomLower():
@@ -18,7 +17,3 @@ def getRandomSpecial():
     # Generate special characteres
     specials = '!@#$%^&*(){}[]=<>/,.?ç;|'
     return random.choice(specials)
-
-def formatPassword(password , length):
-    random.shuffle(password)
-    return ''.join(password[0:length])
