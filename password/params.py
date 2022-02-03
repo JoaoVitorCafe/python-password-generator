@@ -5,6 +5,7 @@ passwordParams = {
     "hasUpper" : rd.getRandomUpper,
     "hasLower" : rd.getRandomLower,
     "hasSpecial" : rd.getRandomSpecial,
+    "minimum" : 8
 }
 
 def getKeys():
