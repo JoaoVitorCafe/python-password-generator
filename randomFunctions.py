@@ -15,5 +15,5 @@ def getRandomUpper():
 
 def getRandomSpecial():
     # Generate special characteres
-    specials = '!@#$%^&*(){}[]=<>/,.?ç;|'
+    specials = '!@#$%^&*()=<>[]/,.?ç;|'
     return random.choice(specials)

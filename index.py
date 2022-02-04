@@ -27,7 +27,4 @@ handler.savePassword(name , password ,save)
 sleep(1)
 
 show = input("Wanna see all the passwords saved? (y/n)")
-handler.showPasswords()
-
-
-
+handler.showPasswords(show)

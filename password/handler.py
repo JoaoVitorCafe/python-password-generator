@@ -2,6 +2,7 @@ import random
 import json
 import password.params as params
 from time import sleep
+import os
 
 def validPrefs(prefs):
     if not "y" in prefs:
@@ -45,23 +46,31 @@ def generatePassword(prefs , length=8):
 
 
 def savePassword(name , password , save):
-    user = {
-        "name" : name ,
-        "password" : password,
-    }
+    if(save == 'y' and password):
+        
+        user = {
+            "name" : name ,
+            "password" : password,
+        }
 
-    if(save == 'y'):
         print("Saving password...")
         sleep(1)
+        
+        if not (os.path.isfile('./passwords.json')):
+            try:
+                filePassword = open("passwords.json" , "w")
+                users = json.dumps([])
+                filePassword.write(users)
+                filePassword.close()
+            except:
+                print("Error creating file to save passwords...")
         try:
             filePassword = open("passwords.json" , "r+")
                     
             # Loads the data of the jsonFile as a dictionary type
             fileData = json.load(filePassword) 
-
             # Append the user to data 
             fileData.append(user)
-
             # Sets file's current position at offset.
             filePassword.seek(0)
             
@@ -71,16 +80,19 @@ def savePassword(name , password , save):
             # Write in the file
             filePassword.write(jsonData)
             print("Password saved sucessfully!")
+            
+            filePassword.close()
         except:
             print("Error to save your new password!")
-        finally:
-            filePassword.close()
 
-def showPasswords():
-    try:
-        filePassword = open("passwords.json" , "r")
-        for password in filePassword:
-            print(password)
-        filePassword.close()
-    except:
-        print("Error to display passwords") 
+def showPasswords(show):
+    if(show == 'y'):
+        try:
+            filePassword = open("passwords.json" , "r")
+            users = json.load(filePassword)
+            for user in users:
+                print(user) 
+            filePassword.close()
+        except:
+            print("Error to display passwords") 
+    
