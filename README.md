@@ -7,9 +7,8 @@
 - Create a password based on your preferences.
 
 ## Todo
- - Implement a length verification with the minimum set to 8 characters.
  - Implement a GUI.
+ - Allow user to delete and update passwords
  - Verify password strength meter.
- - Implement a file handling system to save password along with the username.
 
  
