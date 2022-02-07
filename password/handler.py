@@ -42,15 +42,21 @@ def generatePassword(prefs , length=8):
     # list of final password
     finalPassword = []
     
+    
     if(validPrefs(prefs)):
         print("Creating password..")
         sleep(1)
         
+
         for i in range(0 , length):
             for j in range(0 , len(prefs)):
                 if(prefs[j] == 'y'):
+                    # Get a character related to the parameter
                     char = passwordParams[keys[j]]()
+                    # Append the character to the final password
                     finalPassword.append(char)
+        
+        # Formats password
         password = format(finalPassword , length)
         print("Your new password is " + password)
         return password
@@ -71,6 +77,7 @@ def savePassword(name , password , save):
         print("Saving password...")
         sleep(1)
         
+        # Verify is there's a file to store the passwords
         if not (os.path.isfile('./passwords.json')):
             try:
                 filePassword = open("passwords.json" , "w")
