@@ -1,4 +1,5 @@
 import random
+import string
 # Import random module to generate random numbers
 
 def getRandomNumber():
@@ -15,5 +16,5 @@ def getRandomUpper():
 
 def getRandomSpecial():
     # Generate special characteres
-    specials = '!@#$%^&*()=<>[]/,.?ç;|'
-    return random.choice(specials)
+    special = string.punctuation
+    return random.choice(special)
