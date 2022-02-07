@@ -5,26 +5,41 @@ from time import sleep
 import os
 
 def validPrefs(prefs):
+    # Make sure that there's at leat one positive preference in list of preferences
+    
     if not "y" in prefs:
         return False
     return True
 
 def checkLength(length):
+    # Check if the length chosen by the user is available.. if not set the length to the minimum(8)
+    
     if(length < params.passwordParams["minimum"]):
         print("Your password has been set to have 8 characteres")
         return params.passwordParams["minimum"]
     return length
 
 def format(password , length):
+    # Shuffle the characters and return password
+
     random.shuffle(password)
     return ''.join(password[0:length])
 
 def getPreferences(*preferences):
+    # Turns the preferenes into a list
+    
     return list(preferences)
 
 def generatePassword(prefs , length=8):
+
+
+    # Get the keys of the params that will be used to create password
     keys = params.getKeys()
+    
+    # Get the parameters 
     passwordParams = params.passwordParams
+    
+    # list of final password
     finalPassword = []
     
     if(validPrefs(prefs)):
