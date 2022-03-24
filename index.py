@@ -1,7 +1,9 @@
 import password.handler as handler
 from time import sleep
 
+
 name = str(input("Type your name: "))
+main_password = input("Type a password that will be used to authenticate user and allow you to see saved passwords : ")
 
 print(f"Everything is right , {name}!\n")
 
@@ -27,4 +29,4 @@ handler.savePassword(name , password ,save)
 sleep(1)
 
 show = input("Wanna see all the passwords saved? (y/n)")
-handler.showPasswords(show)
+handler.showPasswords(show , main_password)

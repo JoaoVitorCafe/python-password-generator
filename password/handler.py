@@ -3,9 +3,20 @@ import json
 import password.params as params
 from time import sleep
 import os
+from cryptography.fernet import Fernet
+
+# Loads the key used to encrypt passwords
+def load_key():
+    file = open("key.key", "rb")
+    key = file.read()
+    file.close()
+    return key
+
+key = load_key()
+fer = Fernet(key)
 
 def validPrefs(prefs):
-    # Make sure that there's at leat one positive preference in list of preferences
+    # Make sure that there's at least one positive preference in list of preferences
     
     if not "y" in prefs:
         return False
@@ -31,7 +42,6 @@ def getPreferences(*preferences):
     return list(preferences)
 
 def generatePassword(prefs , length=8):
-
 
     # Get the keys of the params that will be used to create password
     keys = params.getKeys()
@@ -69,9 +79,10 @@ def generatePassword(prefs , length=8):
 def savePassword(name , password , save):
     if(save == 'y' and password):
         
+        # Save the username and the encrypted password
         user = {
             "name" : name ,
-            "password" : password,
+            "password" : fer.encrypt(password.encode()).decode(),
         }
 
         print("Saving password...")
@@ -107,13 +118,25 @@ def savePassword(name , password , save):
         except:
             print("Error to save your new password!")
 
-def showPasswords(show):
-    if(show == 'y'):
+def authenticate(main_password):
+    #  "Authenticate" as a condition to see passwords saved 
+    password = input("Type your main password : ")
+    if(password == main_password):
+        print("User autheticated sucessfuly")
+        return True
+    print("Wrong password")
+    return False
+
+
+def showPasswords(show , main_password):
+    # Show users and decrypted passwords
+    
+    if(show == 'y' and authenticate(main_password)):
         try:
             filePassword = open("passwords.json" , "r")
             users = json.load(filePassword)
             for user in users:
-                print(user) 
+                print(f' Name : {user["name"]} , Password : {fer.decrypt(user["password"].encode()).decode()}')
             filePassword.close()
         except:
             print("Error to display passwords") 
